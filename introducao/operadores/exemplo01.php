@@ -14,6 +14,14 @@ $valorTotal = 0;
 $valorTotal += 100;
 $valorTotal +=25;
 
+//Increment 
+$valorTotal++;
+--$valorTotal;
+
+//Decrement
+$valorTotal--;
+--$valorTotal;
+
 echo($valorTotal);
 
 $a = 10;
