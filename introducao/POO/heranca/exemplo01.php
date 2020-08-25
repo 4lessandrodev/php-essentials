@@ -1,5 +1,6 @@
 <?php 
-
+//As classes filhas acessas as classes PAI, 
+//Classes PAI não acessas a classe filha
 
 class Documento {
 
@@ -15,7 +16,7 @@ class Documento {
 
 }
 
-
+//Cpf é classe filha de Documento 
 class Cpf extends Documento {
 
     public function validarNumero():bool{
