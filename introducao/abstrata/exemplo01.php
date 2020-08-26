@@ -1,5 +1,6 @@
 <?php
 
+
 //Define o padrão da classe veiculo e os metodos que toda classe que extende a ela deve ter
 interface Veiculo{
     public function acelerar($velocidade);
@@ -7,9 +8,8 @@ interface Veiculo{
     public function trocarMarcha($marcha);
 }
 
-
-class Civic implements Veiculo{
-
+//Proibe que seja instanciada, ela apenas possue metodos 
+abstract class Automovel implements Veiculo{
     public function acelerar($velocidade){
         echo "O veiculo acelerou ate " . $velocidade ." km/h";
     }
@@ -19,12 +19,19 @@ class Civic implements Veiculo{
     public function trocarMarcha($marcha){
         echo "O veiculo engatou a marcha " . $marcha;
     }
-
 }
 
-$carro = new Civic();
-$carro->trocarMarcha(3);
 
-var_dump($carro);
+class DelRay extends Automovel{
+    
+    public function empurrar(){
+        echo 'Empurrando ...';
+    }
+    
+}
+
+$carro = new DelRay();
+//$carro = new Automovel(); //Erro
+$carro->acelerar(200);
 
 ?>
