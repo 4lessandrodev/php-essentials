@@ -60,7 +60,7 @@ class User{
     public function findByPk($id){
         $sql = new Sql();
         $result = $sql->select("SELECT * FROM users WHERE id = :ID", array(":ID"=>$id));
-        if(count($result) > 1){
+        if(count($result) < 1){
             return "Usuário não encontrado";
         }
         $row = $result[0];
@@ -81,6 +81,34 @@ class User{
             "id"=>$this->getId(),
             "password"=>$this->getPassword()
         ));
+    }
+
+    public static function findAll(){
+        $sql = new Sql();
+        return $result = $sql->select("SELECT * FROM users");
+    }
+
+    public static function findOne($name){
+        $sql = new Sql();
+        return $sql->select("SELECT * FROM users WHERE name LIKE :NAME ORDER BY name", array(":NAME"=>"%". $name ."%"));
+    }
+
+    public function login($email, $senha){
+        $sql = new Sql();
+        $result = $sql->select("SELECT * FROM users WHERE email = :EMAIL AND password = :PASSWORD", array(
+            ":EMAIL"=>$email, ":PASSWORD"=>$senha
+        ));
+        if(count($result) < 1){
+            return "Usuário e/ou senha inválidos";
+        }
+        $row = $result[0];
+        $this->setName($row['name']);
+        $this->setEmail($row['email']);
+        $this->setCreatedAt(new DateTime($row['created_at']));
+        $this->setId($row['id']);
+        $this->setPassword($row['password']);
+
+        return $this->__toString();
     }
 }
 
